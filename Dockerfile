@@ -1,14 +1,7 @@
-FROM debian:jessie
+FROM debian:stretch-slim
 
-USER root
-
+USER 0
 RUN apt-get update\
- && apt-get install -y --no-install-recommends apt-transport-https ca-certificates curl bsdtar build-essential python git\
+ && apt-get install -y --no-install-recommends curl ca-certificates\
  && rm -rf /var/lib/apt/lists/*
-RUN curl -sSL https://install.meteor.com -o /tmp/install_meteor.sh\
- && sed -i.bak "s/tar -xzf.*/bsdtar -xf \"\$TARBALL_FILE\" -C \"\$INSTALL_TMPDIR\"/g" /tmp/install_meteor.sh\
- && sh /tmp/install_meteor.sh\
- && rm -rf /tmp/*
-
-
-ENV METEOR_ALLOW_SUPERUSER true
+RUN curl -sSL https://install.meteor.com | bash
