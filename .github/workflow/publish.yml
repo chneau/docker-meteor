@@ -1,0 +1,13 @@
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/meteor:2.7.3
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
+      - run: DOCKER_BUILDKIT=1 docker build --tag $IMAGE_NAME .
+      - run: docker push $IMAGE_NAME
