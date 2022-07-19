@@ -12,7 +12,7 @@ jobs:
       packages: write
       contents: read
     env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/meteor:${{ inputs.release }}
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/meteor:${{ inputs.release }}-bullseye-slim
     steps:
       - uses: actions/checkout@v3
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin

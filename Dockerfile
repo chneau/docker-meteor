@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian:bullseye-slim
 RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates && rm -rf /var/lib/apt/lists/* && useradd --create-home --shell /bin/bash meteor
 USER meteor
 WORKDIR /home/meteor
