@@ -39,4 +39,4 @@ jobs:
       - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/meteor:${{ env.RELEASE }}-bullseye-slim" >> $GITHUB_ENV
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
       - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ env.RELEASE }} --build-arg NODE_VERSION=${{ env.NODE_VERSION }} --tag ${{ env.IMAGE_NAME }} .
-      - run: docker push ${{ env.NODE_VERSION }}
+      - run: docker push ${{ env.IMAGE_NAME }}
