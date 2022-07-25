@@ -17,5 +17,5 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
       - run: echo "NODE_VERSION=$(grep 'm2.2 ' .github/versions | cut -d ' ' -f 2)" >> $GITHUB_ENV
-      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ inputs.release }} -build-arg NODE_VERSION=${{ env.NODE_VERSION }} --tag $IMAGE_NAME .
+      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ inputs.release }} --build-arg NODE_VERSION=${{ env.NODE_VERSION }} --tag $IMAGE_NAME .
       - run: docker push $IMAGE_NAME
