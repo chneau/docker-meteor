@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo "RELEASE=$(echo ${{ inputs.release }} | cut -d ' ' -f 1)" >> $GITHUB_ENV
       - run: echo "NODE_VERSION=$(echo ${{ inputs.release }} | cut -d ' ' -f 2)" >> $GITHUB_ENV
-      - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/meteor:$RELEASE-bullseye-slim" >> $GITHUB_ENV
+      - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/meteor:${{ env.RELEASE }}-bullseye-slim" >> $GITHUB_ENV
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
-      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=$RELEASE --build-arg NODE_VERSION=$NODE_VERSION --tag $IMAGE_NAME .
-      - run: docker push $IMAGE_NAME
+      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ env.RELEASE }} --build-arg NODE_VERSION=${{ env.NODE_VERSION }} --tag $IMAGE_NAME .
+      - run: docker push ${{ env.NODE_VERSION }}
