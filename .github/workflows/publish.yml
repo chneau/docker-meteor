@@ -3,6 +3,43 @@ on:
     inputs:
       release:
         description: "Release version"
+        options:
+          - 1.9 12.22.1
+          - 1.9.1 12.22.1
+          - 1.9.2 12.22.1
+          - 1.9.3 12.22.1
+          - 1.10.1 12.22.1
+          - 1.10.2 12.22.1
+          - 1.11 12.22.1
+          - 1.11.1 12.22.1
+          - 1.12 12.22.1
+          - 1.12.1 12.22.1
+          - 2.0 12.22.1
+          - 2.1 12.22.1
+          - 2.1.1 12.22.1
+          - 2.2 12.22.1
+          - 2.2.1 12.22.2
+          - 2.2.2 12.22.4
+          - 2.2.3 12.22.5
+          - 2.2.4 12.22.5
+          - 2.3 14.17.1
+          - 2.3.1 14.17.3
+          - 2.3.2 14.17.3
+          - 2.3.3 14.17.4
+          - 2.3.4 14.17.4
+          - 2.3.5 14.17.5
+          - 2.3.6 14.17.6
+          - 2.4 14.17.6
+          - 2.5 14.18.1
+          - 2.5.6 14.18.3
+          - 2.5.7 14.19.3
+          - 2.5.8 14.19.3
+          - 2.6 14.18.3
+          - 2.6.1 14.18.3
+          - 2.7 14.19.1
+          - 2.7.1 14.19.1
+          - 2.7.2 14.19.1
+          - 2.7.3 14.19.3
         required: true
 
 jobs:
@@ -11,11 +48,11 @@ jobs:
     permissions:
       packages: write
       contents: read
-    env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/meteor:${{ inputs.release }}-bullseye-slim
     steps:
       - uses: actions/checkout@v3
+      - run: echo "RELEASE=$(echo ${{ inputs.release }} | cut -d ' ' -f 1)" >> $GITHUB_ENV
+      - run: echo "NODE_VERSION=$(echo ${{ inputs.release }} | cut -d ' ' -f 2)" >> $GITHUB_ENV
+      - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/meteor:$RELEASE-bullseye-slim" >> $GITHUB_ENV
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
-      - run: echo "NODE_VERSION=$(grep 'm${{ inputs.release }} ' .github/versions | cut -d ' ' -f 2)" >> $GITHUB_ENV
-      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ inputs.release }} --build-arg NODE_VERSION=${{ env.NODE_VERSION }} --tag $IMAGE_NAME .
+      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=$RELEASE --build-arg NODE_VERSION=$NODE_VERSION --tag $IMAGE_NAME .
       - run: docker push $IMAGE_NAME
