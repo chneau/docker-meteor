@@ -1,0 +1,37 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  publish-all:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    strategy:
+      matrix:
+        release:
+          - "2.7.3"
+          - "2.7.2"
+          - "2.7.1"
+          - "2.7"
+          - "2.6.1"
+          - "2.6"
+          - "2.5.8"
+          - "2.5.7"
+          - "2.5.6"
+          - "2.5"
+          - "2.4"
+          - "2.3.6"
+          - "2.3.5"
+          - "2.3.4"
+          - "2.3.3"
+          - "2.3.2"
+          - "2.3.1"
+          - "2.2.4"
+          - "2.2.3"
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/meteor:${{ matrix.release }}-bullseye-slim" >> $GITHUB_ENV
+      - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
+      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ matrix.release }} --tag ${{ env.IMAGE_NAME }} .
+      - run: docker push ${{ env.IMAGE_NAME }}
