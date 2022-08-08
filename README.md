@@ -1,9 +1,16 @@
 # docker-meteor
 
 This is a very simple `Docker` image to use for `Meteor`.  
-Based on `node:bullseye-slim`.
+Based on `debian:bullseye-slim`.
 
 ## Quickstart
+
+Get the correct `Node version` by running:
+
+```bash
+docker run --rm ghcr.io/chneau/meteor:2.7.3-bullseye-slim meteor node --version
+# v14.19.3
+```
 
 Add a `Dockerfile` to your project:
 
