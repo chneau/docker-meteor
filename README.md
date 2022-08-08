@@ -38,4 +38,4 @@ node_modules
 .meteor/local
 ```
 
-For more information, see the `example` folder.
+For more information, see the [`example`](https://github.com/chneau/docker-meteor/tree/master/example) folder.
