@@ -8,14 +8,14 @@ Based on `debian:bullseye-slim`.
 Get the correct `Node version` by running:
 
 ```bash
-docker run --rm ghcr.io/chneau/meteor:2.7.3-bullseye-slim meteor node --version
-# v14.19.3
+docker run --rm ghcr.io/chneau/meteor:2.8.0-bullseye-slim meteor node --version
+# v14.20.1
 ```
 
 Add a `Dockerfile` to your project:
 
 ```Dockerfile
-FROM ghcr.io/chneau/meteor:2.7.3-bullseye-slim AS builder
+FROM ghcr.io/chneau/meteor:2.8.0-bullseye-slim AS builder
 WORKDIR /app
 COPY --chown=meteor:meteor ./package*.json .
 RUN meteor npm ci
@@ -23,7 +23,7 @@ COPY --chown=meteor:meteor . .
 RUN meteor build --server-only --directory bundle
 RUN cd bundle/bundle/programs/server && meteor npm install
 
-FROM node:14.19.3-bullseye-slim AS final
+FROM node:14.20.1-bullseye-slim AS final
 RUN useradd --no-create-home --shell /bin/bash meteor
 USER meteor
 WORKDIR /app
