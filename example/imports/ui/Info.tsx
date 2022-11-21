@@ -1,6 +1,6 @@
-import React from 'react';
-import { useTracker } from 'meteor/react-meteor-data';
-import { LinksCollection, Link } from '../api/links';
+import React from "react";
+import { useTracker } from "meteor/react-meteor-data";
+import { LinksCollection, Link } from "../api/links";
 
 export const Info = () => {
   const links = useTracker(() => {
@@ -10,10 +10,15 @@ export const Info = () => {
   const makeLink = (link: Link) => {
     return (
       <li key={link._id}>
-        <a href={link.url} target="_blank">{link.title}</a>
+        <a
+          href={link.url}
+          target="_blank"
+        >
+          {link.title}
+        </a>
       </li>
     );
-  }
+  };
 
   return (
     <div>

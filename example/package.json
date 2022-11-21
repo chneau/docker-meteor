@@ -5,20 +5,25 @@
     "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "visualize": "meteor --production --extra-packages bundle-visualizer"
+    "visualize": "meteor --production --extra-packages bundle-visualizer",
+    "update": "npm exec --yes concurrently@latest -- --prefix-colors auto --names meteor,npm 'npm run update:meteor' 'npm run update:node'",
+    "update:meteor": "meteor update --all-packages",
+    "update:node": "npm exec --yes npm-check-updates@latest -- --upgrade && npm update",
+    "format": "prettier --cache --write . --ignore-path .gitignore"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.9",
-    "meteor-node-stubs": "^1.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@babel/runtime": "^7.20.1",
+    "meteor-node-stubs": "^1.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/meteor": "^1.4.87",
-    "@types/mocha": "^8.2.3",
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
-    "typescript": "^4.6.3"
+    "@types/meteor": "^2.8.1",
+    "@types/mocha": "^10.0.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "prettier": "^2.7.1",
+    "typescript": "^4.9.3"
   },
   "meteor": {
     "mainModule": {
@@ -26,5 +31,9 @@
       "server": "server/main.ts"
     },
     "testModule": "tests/main.ts"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleAttributePerLine": true
   }
 }

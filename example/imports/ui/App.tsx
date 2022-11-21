@@ -1,6 +1,6 @@
-import React from 'react';
-import { Hello } from './Hello';
-import { Info } from './Info';
+import React from "react";
+import { Hello } from "./Hello";
+import { Info } from "./Info";
 
 export const App = () => (
   <div>
