@@ -1,11 +1,13 @@
-import React from "react";
-import { useTracker } from "meteor/react-meteor-data";
-import { LinksCollection, Link } from "../api/links";
+import { useFind, useSubscribe } from "meteor/react-meteor-data";
+import { Link, LinksCollection } from "../api/links";
 
 export const Info = () => {
-  const links = useTracker(() => {
-    return LinksCollection.find().fetch();
-  });
+  const isLoading = useSubscribe("links");
+  const links = useFind(() => LinksCollection.find());
+
+  if (isLoading()) {
+    return <div>Loading...</div>;
+  }
 
   const makeLink = (link: Link) => {
     return (

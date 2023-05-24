@@ -1,7 +1,7 @@
 ## Example logs
 
 ```bash
-meteor create --release 2.7.3 --typescript .
+meteor create --release 2.12 --typescript .
 
 # Creating the Dockerfile, docker-compose.yml and .dockerignore files
 
