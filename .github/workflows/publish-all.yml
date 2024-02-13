@@ -1,12 +1,11 @@
 on:
   workflow_dispatch:
+  schedule: [{ cron: 0 0 * * * }] # “At 00:00.” see https://crontab.guru/#0_0_*_*_*
 
 jobs:
   publish-all:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
+    permissions: { contents: read, packages: write }
     strategy:
       matrix:
         release:
@@ -43,8 +42,6 @@ jobs:
           - "2.2.4"
           - "2.2.3"
     steps:
-      - uses: actions/checkout@v3
-      - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/meteor:${{ matrix.release }}-bullseye-slim" >> $GITHUB_ENV
+      - uses: actions/checkout@v4
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
-      - run: DOCKER_BUILDKIT=1 docker build --build-arg RELEASE=${{ matrix.release }} --tag ${{ env.IMAGE_NAME }} .
-      - run: docker push ${{ env.IMAGE_NAME }}
+      - run: DOCKER_BUILDKIT=1 docker build --pull --push --build-arg RELEASE=${{ matrix.release }} --tag ghcr.io/${{ github.repository_owner }}/meteor:${{ matrix.release }}-bullseye-slim .
