@@ -9,9 +9,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
+    permissions: { contents: read, packages: write }
     steps:
       - uses: actions/checkout@v3
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
