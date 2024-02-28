@@ -1,4 +1,4 @@
-FROM ghcr.io/chneau/meteor:2.13-bullseye-slim AS builder
+FROM ghcr.io/chneau/meteor:2.13 AS builder
 WORKDIR /app
 COPY --chown=meteor:meteor ./package*.json .
 RUN meteor npm install

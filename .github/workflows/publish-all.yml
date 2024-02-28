@@ -44,4 +44,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
-      - run: DOCKER_BUILDKIT=1 docker build --pull --push --build-arg RELEASE=${{ matrix.release }} --tag ghcr.io/${{ github.repository_owner }}/meteor:${{ matrix.release }}-bullseye-slim .
+      - run: DOCKER_BUILDKIT=1 docker build --pull --push --build-arg RELEASE=${{ matrix.release }} --tag ghcr.io/${{ github.repository_owner }}/meteor:${{ matrix.release }} .
