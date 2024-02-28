@@ -11,6 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions: { contents: read, packages: write }
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
       - run: DOCKER_BUILDKIT=1 docker build --pull --push --build-arg RELEASE=${{ inputs.release }} --tag ghcr.io/${{ github.repository_owner }}/meteor:${{ inputs.release }}-bullseye-slim .
