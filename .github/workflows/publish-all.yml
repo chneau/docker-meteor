@@ -9,6 +9,8 @@ jobs:
     strategy:
       matrix:
         release:
+          - "3.0-rc.1"
+          - "2.16"
           - "2.15"
           - "2.14"
           - "2.13.3"
