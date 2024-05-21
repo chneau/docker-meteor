@@ -8,14 +8,14 @@ Based on `debian:bullseye-slim`.
 Get the correct `Node version` by running:
 
 ```bash
-docker run --rm ghcr.io/chneau/meteor:3.0-rc.1 meteor node --version
+docker run --rm ghcr.io/chneau/meteor:3.0-rc.2 meteor node --version
 # v20.11.1
 ```
 
 Add a `Dockerfile` to your project:
 
 ```Dockerfile
-FROM ghcr.io/chneau/meteor:3.0-rc.1 AS builder
+FROM ghcr.io/chneau/meteor:3.0-rc.2 AS builder
 WORKDIR /app
 COPY --chown=meteor:meteor ./package*.json .
 RUN meteor npm install
