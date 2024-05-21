@@ -9,7 +9,7 @@ Get the correct `Node version` by running:
 
 ```bash
 docker run --rm ghcr.io/chneau/meteor:3.0-rc.2 meteor node --version
-# v20.11.1
+# v20.12.2
 ```
 
 Add a `Dockerfile` to your project:
