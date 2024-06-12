@@ -8,7 +8,7 @@ Based on `debian:bullseye-slim`.
 Get the correct `Node version` by running:
 
 ```bash
-docker run --rm ghcr.io/chneau/meteor:3.0-rc.2 meteor node --version
+docker run --rm ghcr.io/chneau/meteor:3.0-rc.4 meteor node --version
 # v20.12.2
 ```
 
