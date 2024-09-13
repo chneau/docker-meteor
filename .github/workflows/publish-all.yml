@@ -9,11 +9,11 @@ jobs:
     strategy:
       matrix:
         release:
+          - "3.0.3"
+          - "3.0.2"
           - "3.0.1"
           - "3.0"
           - "2.16"
-          - "2.15"
-          - "2.14"
     steps:
       - uses: actions/checkout@v4
       - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
