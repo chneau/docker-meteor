@@ -67,7 +67,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          platforms: ${{ matrix.release != '2.16' && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
+          platforms: ${{ (matrix.release != '2.16' && matrix.release != '3.0') && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
           push: true
           build-args: RELEASE=${{ matrix.release }}
           tags: |
