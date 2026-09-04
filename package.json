@@ -1,0 +1,8 @@
+{
+  "name": "docker-meteor",
+  "private": true,
+  "scripts": {
+    "build": "docker build -t chneau/meteor .",
+    "test": "./test.sh"
+  }
+}
