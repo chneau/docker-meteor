@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "docker build -t chneau/meteor .",
-    "test": "./test.sh"
+    "test": "./test.sh",
+    "start": "bun test"
   }
 }
